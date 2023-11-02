@@ -19,7 +19,7 @@ if ($resultBooksAndAuthors->num_rows > 0) {
         $booksAndAuthors[] = $row;
     }
 } else {
-    echo 'Aucun résultat trouvé';
+    die("Aucune ligne trouvée");
 }
 
 
