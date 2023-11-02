@@ -19,7 +19,7 @@ if ($mysqli->connect_error) {
 }
 
 // Récupération des livres et de leurs auteurs
-$sqlBooksAndAuthors = 'SELECT b.title, a.firstname, a.lastname FROM book b LEFT JOIN author a ON b.author_id = a.id';
+$sqlBooksAndAuthors = 'SELECT b.id, b.title, a.firstname, a.lastname FROM book b LEFT JOIN author a ON b.author_id = a.id';
 $resultBooksAndAuthors = $mysqli->query($sqlBooksAndAuthors);
 
 $booksAndAuthors = [];
@@ -31,6 +31,8 @@ if ($resultBooksAndAuthors->num_rows > 0) {
 } else {
     echo 'Aucun résultat trouvé';
 }
+//Récupération des id des livres 
+
 
 // Affichage de la liste des livres et de leurs auteurs
 echo '<table style="border-collapse: collapse; width: 50%; border: 1px solid black">';
@@ -42,19 +44,20 @@ echo '<th style="text-align: center; border: 1px solid black">Administration</th
 foreach ($booksAndAuthors as $bookAndAuthor) {
     $title = $bookAndAuthor['title'];
     $authorName = $bookAndAuthor['firstname'] . ' ' . $bookAndAuthor['lastname'];
+    $bookId = $bookAndAuthor['id'];
 
     echo '<tr><td style="border: 1px solid black">' . $title . '</td>';
     echo '<td style="text-align: center; border: 1px solid black">' . $authorName . '</td>';
     echo '<td style="text-align: center; border: 1px solid black">';
-    echo '<a href="details.php" target="_blank">Détails</a><br>';
+    echo '<a href="details.php?identifiant=' . $bookId . '" target="_blank">Détails</a><br>';
     echo '<a href="cart.php" target="_blank">Acheter</a></td>';
     echo '<td style="text-align: center; border: 1px solid black">';
-    echo '<a href="edit.php" target="_blank">Modifier</a><br>';
-    echo '<a href="edit.php" target="_blank">Supprimer</a></td></tr>';
+    echo '<a href="edit.php?identifiant=' . $bookId . '" target="_blank">Modifier</a><br>';
+    echo '<a href="delete.php?identifiant=' . $bookId . '" target="_blank">Supprimer</a></td></tr>';
 }
 
 echo '</table>';
-echo '<a href="edit.php" target="_blank"><p>Ajouter un livre</p></a>';
+echo '<a href="add.php" target="_blank"><p>Ajouter un livre</p></a>';
 
 // Inclure le pied de page
 include('footer.php');
