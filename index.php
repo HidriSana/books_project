@@ -1,22 +1,12 @@
 <?php
-// Informations de connexion à la base de données
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'the_library_factory');
+//Connexion à la BDD
+include('server.php');
 
 // Inclure l'en-tête
 $pageTitle = 'Accueil';
 $donkey = 'Donkey';
 $cart = 0;
 include('header.php');
-
-// Connexion à la base de données
-$mysqli = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-
-if ($mysqli->connect_error) {
-    die("Connexion failed: " . $mysqli->connect_error);
-}
 
 // Récupération des livres et de leurs auteurs
 $sqlBooksAndAuthors = 'SELECT b.id, b.title, a.firstname, a.lastname FROM book b LEFT JOIN author a ON b.author_id = a.id';
@@ -31,7 +21,6 @@ if ($resultBooksAndAuthors->num_rows > 0) {
 } else {
     echo 'Aucun résultat trouvé';
 }
-//Récupération des id des livres 
 
 
 // Affichage de la liste des livres et de leurs auteurs
