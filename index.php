@@ -1,6 +1,6 @@
 <?php
 //Connexion à la BDD
-include('server.php');
+require_once('server.php');
 
 // Inclure l'en-tête
 $pageTitle = 'Accueil';

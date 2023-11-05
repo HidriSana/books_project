@@ -1,6 +1,6 @@
 <?php
 // Connexion à la BDD
-include('server.php');
+require_once('server.php');
 
 // Inclure l'en-tête
 $pageTitle = 'Détails';
@@ -37,7 +37,7 @@ echo '<th style="text-align: center; border: 1px solid black">Auteur</th>';
 echo '<th style="text-align: center; border: 1px solid black">Catégorie</th></tr>';
 echo '<tr><td style="border: 1px solid black">' . $i['id'] . '</td>';
 echo '<td style="text-align: center; border: 1px solid black">' . $i['title'] . '</td>';
-echo '<td style="text-align: center; border: 1px solid black">' . $i['firstname'] . $i['lastname'] . '</td>';
+echo '<td style="text-align: center; border: 1px solid black">' . $i['firstname']  . ' ' . $i['lastname'] . '</td>';
 echo '<td style="text-align: center; border: 1px solid black">' . $i['category'] . '</td></tr>';
 echo '</table>';
 
