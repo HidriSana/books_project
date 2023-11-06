@@ -26,6 +26,7 @@ if ($resultBooksDetails->num_rows > 0) {
     die("Aucune ligne trouvée");
 }
 //Mise  en place du tableau d'affichage
+var_dump($i);
 
 echo '<table>';
 echo '<tr><th>ID</th>';
