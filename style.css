@@ -1,0 +1,15 @@
+table {
+    border-collapse: collapse;
+    width: 50%;
+    border: 1px solid black;
+}
+
+th,
+td {
+    border: 1px solid black;
+}
+
+.categories {
+    display: flex;
+    flex-direction: column;
+}

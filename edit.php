@@ -30,7 +30,7 @@ if ($resultBooksDetails->num_rows > 0) {
     die("Aucune ligne trouvée");
 }
 //Récupération de toutes les catégories
-$queryAllCategories =  $mysqli->query('SELECT `name` FROM category');
+$queryAllCategories =  $mysqli->query('SELECT * FROM category');
 
 $allCategories = [];
 if ($queryAllCategories->num_rows > 0) {
@@ -40,17 +40,24 @@ if ($queryAllCategories->num_rows > 0) {
 } else {
     die("Aucune catégorie trouvée");
 }
-var_dump($allCategories);
-/*
-   $i['title'] $i['firstname'] $i['lastname'] $i['category']
-*/
 
+
+//Affichage
 echo '<h2>' . "Modification du livre portant l'id numéro " . $i['id'] . '</h2>';
 
-echo '<form>';
+echo '<form action="" method="post">';
 echo '<div><label for="title">Titre du livre: </label><input type="text" id="title" name="title" value = "' . $i['title'] . '"></div>';
 echo '<div><label for="author">Auteur: </label><input type="text" id="author" name="auhtor" value = "' . $i['firstname'] . $i['lastname'] . '"></div>';
-echo '<div><label for="category">Catégorie(s): </label><input type="checkbox"  id="category">';
+echo '<fieldset><legend>Catégorie(s):</legend>';
+echo '<div  class="categories">';
+
+//Affichage de toutes les catégories, avec la case de la catégorie correspondante  précochée
+foreach ($allCategories as $oneCategory) {
+    $isChecked = ($oneCategory['name'] === $i['category']) ? 'checked' : '';
+    echo '<label><input type="checkbox" name="category[]" value="' . $oneCategory['id'] . '" ' . $isChecked . '>' . $oneCategory['name'] . '</label><br>';
+}
 
 echo '</div>';
+echo '</fieldset>';
+echo '<input type="submit" value="Enregistrer les modifications">';
 echo '</form>';
