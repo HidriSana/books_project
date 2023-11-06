@@ -1,10 +1,16 @@
-<table>
-    <tr>
-        <th>Titre du livre</th>
-        <th>Prénom de l'auteur</th>
-        <th>Nom de l'auteur</th>
-    </tr>
-    <tr>
-        <td></td>
-    </tr>
-</table>
+<form action="" method="post">
+    <div>
+        <label for="title">Titre du livre :</label>
+        <input type="text" id="title" name="title" required>
+    </div>
+    <div>
+        <label for="auhtor">Auteur :</label>
+        <input type="text" id="auhtor" name="author" required>
+    </div>
+    <div>
+        <label for="category">Catégorie :</label>
+        <select name="category" id="category" required>
+            <option value="" disabled selected>Sélectionnez une catégorie</option>
+            <option value="reclamation"></option>
+        </select>
+</form>

@@ -19,7 +19,6 @@ WHERE b.id = ' . $_GET["identifiant"];
 
 $resultBooksDetails = $mysqli->query($sqlBooksDetails);
 
-$bookDetails = [];
 
 if ($resultBooksDetails->num_rows > 0) {
     $i = $resultBooksDetails->fetch_assoc();
