@@ -22,14 +22,12 @@ $resultBooksDetails = $mysqli->query($sqlBooksDetails);
 $bookDetails = [];
 
 if ($resultBooksDetails->num_rows > 0) {
-    while ($row = $resultBooksDetails->fetch_assoc()) {
-        $bookDetails[] = $row;
-    }
+    $i = $resultBooksDetails->fetch_assoc();
 } else {
     die("Aucune ligne trouvée");
 }
 //Mise  en place du tableau d'affichage
-$i = $bookDetails[0];
+
 echo '<table style="border-collapse: collapse; width: 50%; border: 1px solid black">';
 echo '<tr><th style="text-align: left; border: 1px solid black">ID</th>';
 echo '<th style="text-align: center; border: 1px solid black">Titre</th>';
