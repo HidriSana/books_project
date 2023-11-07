@@ -58,28 +58,32 @@ $queryAllCategories =  $mysqli->query('SELECT * FROM category');
 
 $allCategories = [];
 if ($queryAllCategories->num_rows > 0) {
-    while ($category = $queryAllCategories->fetch_assoc()) {
-        $allCategories[] = $category;
+    while ($oneCategory = $queryAllCategories->fetch_assoc()) {
+        $allCategories[] = $oneCategory;
     }
 } else {
     die("Aucune catégorie trouvée");
 }
-//Modification des informations du livre dans la BDD
 
-//Affichage
+$bookCategoriesQuery = $mysqli->query('SELECT category_id FROM book_category WHERE book_id = ' . $_GET["identifiant"]);
+//Récupération des catégories déjà associées au livre
+$bookCategories = [];
+while ($categoryRow = $bookCategoriesQuery->fetch_assoc()) {
+    $bookCategories[] = $categoryRow['category_id'];
+}
+
+// Affichage 
 echo '<h2>' . "Modification du livre portant l'id numéro " . $i['id'] . '</h2>';
-
 echo '<form action="" method="post">';
-echo '<div><label for="title">Titre du livre: </label><input type="text" id="title" name="title" value = "' . $i['title'] . '"></div>';
-echo '<div><label for="firstname">Prénom de l\'auteur: </label><input type="text" id="firstname" name="firstname" value = "' . $i['firstname']  . '"></div>';
-echo '<div><label for="lastname">Nom de l\'auteur: </label><input type="text" id="lastname" name="lastname" value = "' .
-    $i['lastname'] . '"></div>';
+echo '<div><label for="title">Titre du livre: </label><input type="text" id="title" name="title" value="' . $i['title'] . '"></div>';
+echo '<div><label for="firstname">Prénom de l\'auteur: </label><input type="text" id="firstname" name="firstname" value="' . $i['firstname'] . '"></div>';
+echo '<div><label for="lastname">Nom de l\'auteur: </label><input type="text" id="lastname" name="lastname" value="' . $i['lastname'] . '"></div>';
 echo '<fieldset><legend>Catégorie(s):</legend>';
-echo '<div  class="categories">';
+echo '<div class="categories">';
 
-//Affichage de toutes les catégories, avec la case de la catégorie correspondante  précochée
+// Affichage de toutes les catégories avec les cases cochées si elles sont associées au livre
 foreach ($allCategories as $oneCategory) {
-    $isChecked = ($oneCategory['name'] === $i['category']) ? 'checked' : '';
+    $isChecked = in_array($oneCategory['id'], $bookCategories) ? 'checked' : '';
     echo '<label><input type="checkbox" name="category[]" value="' . $oneCategory['id'] . '" ' . $isChecked . '>' . $oneCategory['name'] . '</label><br>';
 }
 
@@ -87,3 +91,6 @@ echo '</div>';
 echo '</fieldset>';
 echo '<input type="submit" value="Enregistrer les modifications">';
 echo '</form>';
+
+// Pied de page
+include('footer.php');

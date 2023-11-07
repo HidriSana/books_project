@@ -2,7 +2,7 @@
 // Connexion à la BDD
 require_once('server.php');
 
-// Inclure l'en-tête
+// En-tête
 $pageTitle = 'Détails';
 $donkey = 'Donkey'; // A modifier   une fois que le login est géré ++++
 $cart = 0;
@@ -27,13 +27,13 @@ if ($resultBooksDetails->num_rows > 0) {
     echo '<th>Auteur</th>';
     echo '<th>Catégorie</th></tr>';
 
-    $i = $resultBooksDetails->fetch_assoc(); // Récupère le premier résultat
+    $i = $resultBooksDetails->fetch_assoc();
     echo '<tr><td>' . $i['id'] . '</td>';
     echo '<td>' . $i['title'] . '</td>';
     echo '<td>' . $i['firstname']  . ' ' . $i['lastname'] . '</td>';
     echo '<td>';
-
-    $categories[] = $i['category']; // Stocke la première catégorie
+    //Getting  the first eelement of category ,didn't work otherwise, in the loop below. It would bring starting by the second element
+    $categories[] = $i['category'];
 
     while ($i = $resultBooksDetails->fetch_assoc()) {
         $categories[] = $i['category'];
@@ -50,5 +50,5 @@ if ($resultBooksDetails->num_rows > 0) {
 
 
 
-// Inclure le pied de page
+// Pied de page
 include('footer.php');
