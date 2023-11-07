@@ -19,26 +19,34 @@ WHERE b.id = ' . $_GET["identifiant"];
 
 $resultBooksDetails = $mysqli->query($queryBooksDetails);
 
-
+$categories = [];
 if ($resultBooksDetails->num_rows > 0) {
-    $i = $resultBooksDetails->fetch_assoc();
+    echo '<table>';
+    echo '<tr><th>ID</th>';
+    echo '<th>Titre</th>';
+    echo '<th>Auteur</th>';
+    echo '<th>Catégorie</th></tr>';
+
+    $i = $resultBooksDetails->fetch_assoc(); // Récupère le premier résultat
+    echo '<tr><td>' . $i['id'] . '</td>';
+    echo '<td>' . $i['title'] . '</td>';
+    echo '<td>' . $i['firstname']  . ' ' . $i['lastname'] . '</td>';
+    echo '<td>';
+
+    $categories[] = $i['category']; // Stocke la première catégorie
+
+    while ($i = $resultBooksDetails->fetch_assoc()) {
+        $categories[] = $i['category'];
+    };
+    foreach ($categories as $category) {
+        echo $category . '</br>';
+    }
+
+    echo '</td></tr>';
+    echo '</table>';
 } else {
     die("Aucune ligne trouvée");
 }
-//Mise  en place du tableau d'affichage
-var_dump($i);
-
-echo '<table>';
-echo '<tr><th>ID</th>';
-echo '<th>Titre</th>';
-echo '<th>Auteur</th>';
-echo '<th>Catégorie</th></tr>';
-echo '<tr><td>' . $i['id'] . '</td>';
-echo '<td>' . $i['title'] . '</td>';
-echo '<td>' . $i['firstname']  . ' ' . $i['lastname'] . '</td>';
-echo '<td>' . $i['category'] . '</td></tr>';
-echo '</table>';
-
 
 
 
