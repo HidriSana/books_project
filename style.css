@@ -1,7 +1,43 @@
+body {
+    margin: auto;
+    max-width: 1080px;
+}
+
+header {
+    background-color: lightsalmon;
+    width: 80%;
+}
+
+main {
+    background-color: rgb(243, 189, 189);
+    width: 80%;
+}
+
+a {
+    text-decoration: none;
+    text-align: center;
+    color: brown;
+}
+
+form {
+    width: 100%;
+}
+
+form div {
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+}
+
+form div input {
+    width: 70%;
+}
+
 table {
     border-collapse: collapse;
-    width: 50%;
     border: 1px solid black;
+    margin: auto;
+    width: 100%;
 }
 
 th,
@@ -12,4 +48,28 @@ td {
 .categories {
     display: flex;
     flex-direction: column;
+}
+
+.deletion {
+    border: 2px solid black;
+    z-index: 1000;
+    margin: auto;
+    width: 50vw;
+    height: 50vh;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: fadeOut 2s ease-in-out 2s forwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        display: none;
+    }
 }

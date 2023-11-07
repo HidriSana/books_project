@@ -37,7 +37,6 @@ if (!empty($_POST)) {
         echo 'Échec de la mise à jour';
     }
 }
-var_dump($_POST);
 $queryBooksDetails = 'SELECT b.id, b.title, a.firstname, a.lastname, c.name AS `category`
 FROM book b 
 LEFT JOIN author a ON b.author_id = a.id
