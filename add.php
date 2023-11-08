@@ -14,23 +14,42 @@ if (!empty($_POST)) {
     $authorLastname = $_POST['lastname'];
     $bookCategories = $_POST['category'];
 
-    // Insérer l'auteur s'il n'existe pas
-    $queryCreateAuthor = "INSERT INTO author (firstname, lastname) VALUES ('$authorFirstname', '$authorLastname')";
-    $createAuthor = $mysqli->query($queryCreateAuthor);
+    // Utilisation de requêtes préparées pour insérer l'auteur s'il n'existe pas
+    $queryCreateAuthor = "INSERT INTO author (firstname, lastname) VALUES (?, ?)";
+    $stmtAuthor = $mysqli->prepare($queryCreateAuthor);
 
-    if ($createAuthor) {
+    if ($stmtAuthor) {
+        $stmtAuthor->bind_param('ss', $authorFirstname, $authorLastname);
+        $stmtAuthor->execute();
+
         // Récupérer l'ID de l'auteur nouvellement inséré
         $newAuthorID = $mysqli->insert_id;
+        $stmtAuthor->close();
 
-        // Insérer le livre en utilisant l'ID de l'auteur
-        $queryCreateBookDetails = "INSERT INTO book (title, author_id) VALUES ('$bookTitle', $newAuthorID)";
-        $createBookDetails = $mysqli->query($queryCreateBookDetails);
+        // Utilisation de requêtes préparées pour insérer le livre en utilisant l'ID de l'auteur
+        $queryCreateBookDetails = "INSERT INTO book (title, author_id) VALUES (?, ?)";
+        $stmtBook = $mysqli->prepare($queryCreateBookDetails);
 
-        if ($createBookDetails) {
+        if ($stmtBook) {
+            $stmtBook->bind_param('si', $bookTitle, $newAuthorID);
+            $stmtBook->execute();
+
+            // Récupérer l'ID du livre nouvellement inséré
             $newBookID = $mysqli->insert_id;
+            $stmtBook->close();
 
-            foreach ($bookCategories as $categoryId) {
-                $mysqli->query("INSERT INTO book_category (book_id, category_id) VALUES ($newBookID, $categoryId)");
+            // Utilisation de requêtes préparées pour insérer les relations livre-catégorie
+            $queryInsertCategory = "INSERT INTO book_category (book_id, category_id) VALUES (?, ?)";
+            $stmtCategory = $mysqli->prepare($queryInsertCategory);
+
+            if ($stmtCategory) {
+                foreach ($bookCategories as $categoryId) {
+                    $stmtCategory->bind_param('ii', $newBookID, $categoryId);
+                    $stmtCategory->execute();
+                }
+                $stmtCategory->close();
+            } else {
+                echo 'Échec de l\'ajout des catégories.';
             }
 
             echo 'Le nouveau livre a été ajouté avec succès.';
@@ -42,6 +61,7 @@ if (!empty($_POST)) {
     }
 }
 
+// Récupération de toutes les catégories
 $queryAllCategories = $mysqli->query('SELECT * FROM category');
 
 $allCategories = [];
@@ -57,7 +77,7 @@ echo '<h2>Ajouter un nouveau livre</h2>';
 echo '<form action="" method="post">';
 echo '<div><label for="title">Titre du livre: </label><input type="text" id="title" name="title"></div>';
 echo '<div><label for="firstname">Prénom de l\'auteur: </label><input type="text" id="firstname" name="firstname"></div>';
-echo '<div><label for="lastname">Nom de l\'auteur: </label><input type="text" id="lastname" name="lastname"></div>';
+echo '<div><label for "lastname">Nom de l\'auteur: </label><input type="text" id="lastname" name="lastname"></div>';
 echo '<fieldset><legend>Catégorie(s):</legend>';
 echo '<div class="categories">';
 
@@ -71,5 +91,6 @@ echo '</fieldset>';
 echo '<input type="submit" value="Ajouter le livre">';
 echo '</form>';
 
+header('Location: /index.php');
 // Pied de page
 include('footer.php');
