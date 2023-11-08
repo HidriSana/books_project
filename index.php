@@ -1,34 +1,36 @@
 <?php
-//Connexion à la BDD
+// Connection to DB
 require_once('server.php');
 
-// Inclure l'en-tête
+// Header
 $pageTitle = 'Accueil';
 $donkey = 'Donkey';
 $cart = 0;
 include('header.php');
 
 $query = isset($_GET['query']) ? $_GET['query'] : '';
-// Récupération des livres et de leurs auteurs
+
+// Prepared request
 $queryBooksAndAuthors = "SELECT b.id, b.title, a.firstname, a.lastname 
 FROM book b 
 LEFT JOIN author a ON b.author_id = a.id
-WHERE b.title LIKE '%$query%' OR a.firstname LIKE '%$query%' OR a.lastname LIKE '%$query'";
+WHERE b.title LIKE ? OR a.firstname LIKE ? OR a.lastname LIKE ?";
 
-$resultBooksAndAuthors = $mysqli->query($queryBooksAndAuthors);
+if ($statement = $mysqli->prepare($queryBooksAndAuthors)) {
+    $param = "%" . $query . "%";
+    $statement->bind_param("sss", $param, $param, $param);
 
-$booksAndAuthors = [];
+    $statement->execute();
 
-if ($resultBooksAndAuthors->num_rows > 0) {
-    while ($row = $resultBooksAndAuthors->fetch_assoc()) {
-        $booksAndAuthors[] = $row;
-    }
+    $resultBooksAndAuthors = $statement->get_result();
+    $booksAndAuthors = $resultBooksAndAuthors->fetch_all(MYSQLI_ASSOC);
+
+    $statement->close();
 } else {
-    die("Aucune ligne trouvée");
+    die("Erreur de requête préparée");
 }
 
-
-// Affichage de la liste des livres et de leurs auteurs
+//Displaying books and authors 
 echo '<table>';
 echo '<tr><th>Titre du livre</th>';
 echo '<th>Auteur</th>';
@@ -40,8 +42,8 @@ foreach ($booksAndAuthors as $bookAndAuthor) {
     $authorName = $bookAndAuthor['firstname'] . ' ' . $bookAndAuthor['lastname'];
     $bookId = $bookAndAuthor['id'];
 
-    echo '<tr><td>' . $title . '</td>';
-    echo '<td>' . $authorName . '</td>';
+    echo '<tr><td>' . htmlspecialchars($title) . '</td>';
+    echo '<td>' . htmlspecialchars($authorName) . '</td>';
     echo '<td>';
     echo '<a href="details.php?identifiant=' . $bookId . '" target="_blank">Détails</a><br>';
     echo '<a href="cart.php" target="_blank">Acheter</a></td>';
