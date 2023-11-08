@@ -18,3 +18,4 @@ $bookDeletion = $mysqli->query("DELETE FROM book WHERE id = " . $_GET['identifia
 header('Location: /index.php');
 echo '<p>Le livre a bien été supprimé</p>';
 die;
+include('footer.php');

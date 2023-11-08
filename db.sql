@@ -44,6 +44,9 @@ INSERT INTO book (title, author_id) VALUES
   FROM book b
   LEFT JOIN author a ON b.author_id = a.id;
   LEFT JOIN category c ON b.category_id = c.id;
-  WHERE b.id = " . $_GET['identifiant'])
+  WHERE b.id =  . $_GET['identifiant'];
 
-  
+CREATE TABLE `user` (
+  `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `login` VARCHAR(100) NOT NULL
+);

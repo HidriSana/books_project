@@ -8,8 +8,13 @@ $donkey = 'Donkey';
 $cart = 0;
 include('header.php');
 
+$query = isset($_GET['query']) ? $_GET['query'] : '';
 // Récupération des livres et de leurs auteurs
-$queryBooksAndAuthors = 'SELECT b.id, b.title, a.firstname, a.lastname FROM book b LEFT JOIN author a ON b.author_id = a.id';
+$queryBooksAndAuthors = "SELECT b.id, b.title, a.firstname, a.lastname 
+FROM book b 
+LEFT JOIN author a ON b.author_id = a.id
+WHERE b.title LIKE '%$query%' OR a.firstname LIKE '%$query%' OR a.lastname LIKE '%$query'";
+
 $resultBooksAndAuthors = $mysqli->query($queryBooksAndAuthors);
 
 $booksAndAuthors = [];

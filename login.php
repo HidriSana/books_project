@@ -1,12 +1,3 @@
-<form action="" method="post">
-    <div>
-        <label for="login">Identifiant:</label>
-        <input type="text" id="login" name="login" required>
-    </div>
-    <div>
-        <button type="submit">Se connecter</button>
-    </div>
-</form>
 
 <?php
 var_dump($_POST);
