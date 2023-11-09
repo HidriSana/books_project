@@ -1,7 +1,4 @@
 <?php
-// Connexion à la BDD
-require_once('server.php');
-
 // En-tête
 $pageTitle = 'Modifier un livre';
 $donkey = 'Donkey'; // À modifier une fois que le login est géré ++++

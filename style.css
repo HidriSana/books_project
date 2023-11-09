@@ -96,6 +96,7 @@ input[type="submit"] {
     width: 50%;
     margin: auto;
     margin-top: 10px;
+    display: block;
 }
 
 input[type="submit"]:hover {

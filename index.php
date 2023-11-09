@@ -1,7 +1,4 @@
 <?php
-// Connection to DB
-require_once('server.php');
-
 // Header
 $pageTitle = 'Accueil';
 $donkey = 'Donkey';

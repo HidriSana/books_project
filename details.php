@@ -1,7 +1,4 @@
 <?php
-// Connexion à la BDD
-require_once('server.php');
-
 // En-tête
 $pageTitle = 'Détails';
 $donkey = 'Donkey'; // A modifier   une fois que le login est géré ++++

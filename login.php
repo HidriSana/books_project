@@ -1,7 +1,5 @@
 <?php
-require_once('server.php');
-
-// En-tête
+// Header
 $pageTitle = 'Se connecter';
 $donkey = 'Donkey'; // À modifier une fois que le login est géré
 $cart = 0;
@@ -26,7 +24,7 @@ include('header.php');
 $login = $_POST['login'];
 
 if (empty($login)) {
-   //header('location: login.php');
+    //header('location: login.php');
     echo 'Vous devez être identifié pour accéder à cette page.';
 } else {
     session_start();

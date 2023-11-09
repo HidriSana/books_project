@@ -1,7 +1,4 @@
 <?php
-// Connection to db
-require_once('server.php');
-
 // Header
 $pageTitle = 'Supprimer un livre';
 $donkey = 'Donkey'; // À modifier une fois que le login est géré ++++

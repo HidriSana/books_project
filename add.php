@@ -1,10 +1,7 @@
 <?php
-// Connexion à la BDD
-require_once('server.php');
-
 // En-tête
 $pageTitle = 'Ajouter un livre';
-$donkey = 'Donkey'; // À modifier une fois que le login est géré
+$donkey = 'Donkey'; // À modifier une fois que le login est géré ++++++++++++
 $cart = 0;
 include('header.php');
 
@@ -34,7 +31,7 @@ if (!empty($_POST)) {
             $stmtBook->bind_param('si', $bookTitle, $newAuthorID);
             $stmtBook->execute();
 
-            // Récupérer l'ID du livre nouvellement inséré
+
             $newBookID = $mysqli->insert_id;
             $stmtBook->close();
 
@@ -91,6 +88,6 @@ echo '</fieldset>';
 echo '<input type="submit" value="Ajouter le livre">';
 echo '</form>';
 
-header('Location: /index.php');
+//header('Location: /index.php');
 // Pied de page
 include('footer.php');

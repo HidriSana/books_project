@@ -26,3 +26,8 @@
 
     </header>
     <main>
+        <?php
+        // Connection to db
+        require_once('server.php');
+        //Functions 
+        require_once('functions.php');
