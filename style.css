@@ -86,6 +86,22 @@ button:hover {
     flex-direction: column;
 }
 
+input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 50%;
+    margin: auto;
+    margin-top: 10px;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
 .categories input {
     margin-right: 0;
     width: 10%;
@@ -105,4 +121,56 @@ button:hover {
 .cart::before {
     content: '\1F6D2';
     margin-right: 5px;
+}
+
+.formLogin {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    /* Centrer le contenu du formulaire */
+}
+
+/* Style pour le bouton à l'intérieur du formulaire .formLogin */
+.formLogin input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 50%;
+    margin-top: 10px;
+}
+
+.formLogin input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.register {
+    text-align: center;
+}
+
+.addBook {
+    display: block;
+    text-align: center;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    margin: auto;
+    transition: background-color 0.2s;
+    width: 50%;
+}
+
+.addBook:hover {
+    background-color: #0056b3;
 }

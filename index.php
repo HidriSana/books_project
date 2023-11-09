@@ -53,7 +53,7 @@ foreach ($booksAndAuthors as $bookAndAuthor) {
 }
 
 echo '</table>';
-echo '<a href="add.php" target="_blank"><p>Ajouter un livre</p></a>';
+echo '<a href="add.php" target="_blank" class="addBook"><p>Ajouter un livre</p></a>';
 
 // Inclure le pied de page
 include('footer.php');
