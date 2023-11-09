@@ -1,58 +1,84 @@
 body {
     margin: auto;
-    max-width: 1080px;
-    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    max-width: 980px;
 }
 
 header {
-    background-color: lightsalmon;
-    width: 80%;
-    margin: auto;
+    background-color: #343a40;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
 }
 
 main {
-    background-color: rgb(243, 189, 189);
-    width: 80%;
-    margin: auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-td a {
+a {
     text-decoration: none;
-    text-align: center;
-    color: brown;
-    background-color: white;
-    display: block;
-    font-size: 1.2rem;
+    color: #007bff;
 }
 
-p {
-    margin: 0;
-}
-
-form {
-    width: 100%;
-}
-
-form div {
-    display: flex;
-    width: 80%;
-    justify-content: space-between;
-}
-
-form div input {
-    width: 70%;
+a:hover {
+    text-decoration: underline;
 }
 
 table {
     border-collapse: collapse;
-    border: 1px solid black;
-    margin: auto;
     width: 100%;
+    margin: 20px 0;
 }
 
 th,
 td {
-    border: 1px solid black;
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #343a40;
+    color: #fff;
+}
+
+form {
+    width: 100%;
+    margin: 20px 0;
+}
+
+form div {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+form label {
+    font-weight: bold;
+}
+
+form input {
+    width: 70%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
 }
 
 .categories {
@@ -60,26 +86,23 @@ td {
     flex-direction: column;
 }
 
-.deletion {
-    border: 2px solid black;
-    z-index: 1000;
-    margin: auto;
-    width: 50vw;
-    height: 50vh;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: fadeOut 2s ease-in-out 2s forwards;
+.categories input {
+    margin-right: 0;
+    width: 10%;
 }
 
-@keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
+.home::before {
+    content: '\1F3E0';
+    margin-right: 5px;
+    display: inline-block;
+}
 
-    100% {
-        opacity: 0;
-        display: none;
-    }
+.connect::before {
+    content: '\1F464';
+    margin-right: 5px;
+}
+
+.cart::before {
+    content: '\1F6D2';
+    margin-right: 5px;
 }

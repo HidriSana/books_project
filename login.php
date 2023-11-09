@@ -1,4 +1,14 @@
-
+<form action="" method="post">
+    <div>
+        <label for="login">Login :</label>
+        <input type="text" id="title" name="login" required>
+    </div>
+    <div>
+        <label for="auhtor">Password :</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+    <input type"submit" value="Se connecter">
+</form>
 <?php
 var_dump($_POST);
 

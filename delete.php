@@ -8,6 +8,7 @@ $donkey = 'Donkey'; // À modifier une fois que le login est géré ++++
 $cart = 0;
 include('header.php');
 
+
 // Suppression d'un livre
 if (isset($_GET['identifiant'])) {
     // Récupération de l'identifiant du livre
@@ -15,23 +16,23 @@ if (isset($_GET['identifiant'])) {
 
     // Utilisation de requêtes préparées pour la suppression
     $queryDeleteBookCategory = "DELETE FROM book_category WHERE book_id = ?";
-    $stmt1 = $mysqli->prepare($queryDeleteBookCategory);
+    $statement1 = $mysqli->prepare($queryDeleteBookCategory);
 
-    if ($stmt1) {
-        $stmt1->bind_param('i', $bookID);
-        $stmt1->execute();
-        $stmt1->close();
+    if ($statement1) {
+        $statement1->bind_param('i', $bookID);
+        $statement1->execute();
+        $statement1->close();
     } else {
         echo "Échec de la suppression des relations livre-catégorie.";
     }
 
     $queryDeleteBook = "DELETE FROM book WHERE id = ?";
-    $stmt2 = $mysqli->prepare($queryDeleteBook);
+    $statement2 = $mysqli->prepare($queryDeleteBook);
 
-    if ($stmt2) {
-        $stmt2->bind_param('i', $bookID);
-        $stmt2->execute();
-        $stmt2->close();
+    if ($statement2) {
+        $statement2->bind_param('i', $bookID);
+        $statement2->execute();
+        $statement2->close();
     } else {
         echo "Échec de la suppression du livre.";
     }
