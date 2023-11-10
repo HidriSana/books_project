@@ -6,7 +6,7 @@ $cart = 0;
 include('header.php');
 ?>
 
-<form action="" method="post" class="formLogin">
+<form action="saveRegistration.php" method="post" class="formLogin">
     <div>
         <label for="login">Identifiant :</label>
         <input type="text" id="login" name="login" required>
@@ -23,37 +23,4 @@ include('header.php');
 </form>
 <p class='register'><a href="register.php">Je n'ai pas encore de compte</a></p>
 <?php
-$login = $_POST['login'];
-$password = $_POST['password'];
-$confirmPassword = $_POST['confirmPassword'];
-$hash = password_hash($password, PASSWORD_DEFAULT);
-$inputErrors = [];
-
-if (!empty($_POST)) {;
-    if (empty($login)) {
-        echo 'Vous devez saisir un login';
-        $inputErrors[] = 'Champ login vide';
-    } else {
-        $login = test_input($login);
-        if (!preg_match("^[a-z0-9]+$", $login)) {
-            echo 'Votre login doit uniquement comporter des minuscules et des chiffres';
-            $inputErrors[] = 'Champ login vide';
-        }
-    }
-    /*
-
-Vérification du password ici
-
-
-*/
-    if ($password === $confirmPassword) {
-        $query = "INSERT INTO user (login, password) VALUES (?, ?)";
-        $statement = $mysqli->prepare($query);
-        $statement->bind_param('ss', $login, $hash);
-        $statement->execute();
-        echo 'Votre compte a bien été créé';
-    } else {
-        echo 'Les mots de passe ne sont pas identiques';
-    }
-}
-?>
+include('footer.php');
